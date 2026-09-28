@@ -1,5 +1,5 @@
 import express from 'express'
-import bycrypt from 'bcryptjs'
+import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 import db from '../db.js'
 
@@ -28,7 +28,25 @@ router.post('/register',(req,res)=>{
   }
 })
 
-router.post('/login',(req,res)=>{})
+router.post('/login',(req,res)=>{
+  const {username, password} = req.body
+  try{
+    const getuser = db.prepare(`SELECT * FROM users WHERE username = ?`)
+    const user = getuser.get(username)
+    //if we cannont find the associate user name 
+    if(!user){return res.status(404).send({message:'User not found'})}
+
+    const passwordIsvalid = bcrypt.compareSync(password, user.password)
+    //if the password is not match , return this function 
+    if (!passwordIsvalid ){return res.status(401).send({message :"Invalid password"})}
+    console.log(user)
+    //then we have a successful authentication 
+    const token = jwt.sign({id:user.id})
+  }catch (err){
+    console.log(err.message)
+    res.sendStatus(503)
+  }
+})
 
 
 export default router
