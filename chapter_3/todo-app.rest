@@ -18,3 +18,16 @@ Content-Type: application/json
   "username": "Benuka",
   "password": "Benuka@12"
 }
+
+### Fetch all todos GET/TODOS
+GET http://localhost:5003/todos
+Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzkwNzExMTY2LCJleHAiOjE3OTA3OTc1NjZ9.CH0xMt3gKWw_H2qPxrWSKitL5ySsiXfmI_nE4HIhe1k
+
+### CREATES a new todo POST/TODOS {protected}
+POST http://localhost:5003/todos
+Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzkwNzExMTY2LCJleHAiOjE3OTA3OTc1NjZ9.CH0xMt3gKWw_H2qPxrWSKitL5ySsiXfmI_nE4HIhe1k
+Content-Type: application/json
+
+{
+  "task": "Finish coding the project"
+}

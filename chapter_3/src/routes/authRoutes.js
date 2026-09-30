@@ -8,7 +8,7 @@ const router = express.Router()
 router.post('/register',(req,res)=>{
   const {username, password} = req.body
   
-  const hashedPassword = bycrypt.hashSync(password,10)
+  const hashedPassword = bcrypt.hashSync(password,10)
   
   try {
     const insertUser = db.prepare(`INSERT INTO users(username,password) VALUES(?,?)`)
@@ -38,10 +38,13 @@ router.post('/login',(req,res)=>{
 
     const passwordIsvalid = bcrypt.compareSync(password, user.password)
     //if the password is not match , return this function 
+
     if (!passwordIsvalid ){return res.status(401).send({message :"Invalid password"})}
     console.log(user)
+
     //then we have a successful authentication 
-    const token = jwt.sign({id:user.id})
+    const token = jwt.sign({id:user.id},process.env.JWT_SECRET, {expiresIn:'24h'})
+    res.json({token})
   }catch (err){
     console.log(err.message)
     res.sendStatus(503)
