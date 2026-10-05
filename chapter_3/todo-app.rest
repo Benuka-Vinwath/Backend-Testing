@@ -21,13 +21,26 @@ Content-Type: application/json
 
 ### Fetch all todos GET/TODOS
 GET http://localhost:5003/todos
-Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzkwNzExMTY2LCJleHAiOjE3OTA3OTc1NjZ9.CH0xMt3gKWw_H2qPxrWSKitL5ySsiXfmI_nE4HIhe1k
-
+Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzkwNzY5ODUyLCJleHAiOjE3OTA4NTYyNTJ9.zuBdZpEvtHWNB5kaiBHb_ypuObW2GmeIWgrPYWR8hdk
 ### CREATES a new todo POST/TODOS {protected}
 POST http://localhost:5003/todos
-Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzkwNzExMTY2LCJleHAiOjE3OTA3OTc1NjZ9.CH0xMt3gKWw_H2qPxrWSKitL5ySsiXfmI_nE4HIhe1k
+Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzkwNzY5ODUyLCJleHAiOjE3OTA4NTYyNTJ9.zuBdZpEvtHWNB5kaiBHb_ypuObW2GmeIWgrPYWR8hdk
 Content-Type: application/json
 
 {
   "task": "Finish coding the project"
 }
+
+### update a todo / PUT / TODOS/:ID{protected}
+PUT http://localhost:5003/todos/2?task="THis is updated"
+Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzkwNzY5ODUyLCJleHAiOjE3OTA4NTYyNTJ9.zuBdZpEvtHWNB5kaiBHb_ypuObW2GmeIWgrPYWR8hdk
+Content-Type: application/json 
+
+{
+  "completed": 1
+  
+}
+
+### delete a todo / PUT / TODOS/:ID{protected}
+DELETE  http://localhost:5003/todos/2
+Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzkwNzY5ODUyLCJleHAiOjE3OTA4NTYyNTJ9.zuBdZpEvtHWNB5kaiBHb_ypuObW2GmeIWgrPYWR8hdk

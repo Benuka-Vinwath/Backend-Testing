@@ -20,17 +20,20 @@ router.post('/',(req,res)=>{
 
 //update a todo 
 router.put('/:id',(req,res)=>{
-  const {task,completed} = req.body
-  const updateTodo = db.prepare(`UPDATE todos SET task = ?, completed = ? WHERE id = ? AND user_id = ?`)
-  updateTodo.run(task,completed,req.params.id,req.userId)
-  res.json({id: req.params.id,task,completed})
+  const {completed} = req.body
+  const {id} = req.params
+  const updatedTodo = db.prepare(`UPDATE todos SET completed = ? WHERE id = ? AND user_id = ?`)
+  updatedTodo.run(completed, id, req.userId)
+  res.json({message:"Todo completed"})
 })
 
 //delete a todo
 router.delete('/:id',(req,res)=>{
-  const deleteTodo = db.prepare(`DELETE FROM todos WHERE id = ? AND user_id = ?`)
-  deleteTodo.run(req.params.id,req.userId)
-  res.json({message: "Todo deleted"})
+  const {id} = req.params
+  const userId = req.userId
+  const deleteTodo = db.prepare(`DELETE FROM todos WHERE id  = ? AND user_id = ?`)
+  deleteTodo.run(id,userId)
+  res.send({message:"Todo deleted "})
 })
 
 export default router
